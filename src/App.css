@@ -36,3 +36,65 @@
     transform: rotate(360deg);
   }
 }
+
+.App-NavBar {
+  background-color: black;
+  height: 15vh;
+  color: white;
+  display: flex;
+}
+
+.cascadeLogo{
+  flex: 1;
+  /* border: 2px solid white; */
+  display: flex;
+  justify-content: center;
+align-items: center;
+align-content: center;
+}
+
+img{
+  height: 60px;
+  width: 60px;
+}
+
+.NavBar-Links {
+  /* border: 2px solid white; */
+  flex: 5;
+  /* display: flex; */
+  text-align: center;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.link{
+  text-decoration: none;
+  color: white;
+}
+
+.NavBar-LoginContact{
+  flex: 2;
+  /* width: 20px; */
+  /* border: 2px solid white; */
+  /* margin: 20px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.agentLogIn{
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+}
+
+.contactUs{
+  text-decoration: none;
+  color: black;
+  background-color: orange;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+

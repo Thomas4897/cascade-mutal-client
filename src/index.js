@@ -1,12 +1,29 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App";
+import UserLogin from "./Components/UserLogin";
+import Claims from "./Components/CreateClaim";
+import ContactUs from "./Components/ContactUs";
+import { Provider } from "react-redux";
+import store from "./app/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="/user-login" element={<UserLogin />} />
+            {/* <Route path="/user-logout" element={<UserLogout />} /> */}
+            <Route path="/claims" element={<Claims />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
