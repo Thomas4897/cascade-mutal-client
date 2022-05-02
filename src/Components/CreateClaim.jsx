@@ -7,7 +7,13 @@ import "../App.css";
 
 // const URL = "http://localhost:4000";
 
-const URL = process.env.REACT_APP_URL || "http://localhost:4000";
+// const URL = process.env.REACT_APP_URL || "http://localhost:4000";
+
+let URL = "";
+
+process.env.REACT_APP_PRODUCTION === "heroku"
+  ? (URL = process.env.REACT_APP_URL)
+  : (URL = "http://localhost:4000");
 
 export default function CreateClaim() {
   const [title, setTitle] = useState("");
