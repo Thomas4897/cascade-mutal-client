@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -46,11 +46,9 @@
 
 .cascadeLogo{
   flex: 1;
-  /* border: 2px solid white; */
   display: flex;
   justify-content: center;
-align-items: center;
-align-content: center;
+  align-items: center;
 }
 
 img{
@@ -104,8 +102,6 @@ img{
 
 .ClaimHistory{
   text-align: left;
-  /* border: 2px solid white; */
-  /* padding: 20px; */
   margin: 20px;
 
 }
@@ -157,4 +153,24 @@ img{
 
 .ClaimDescription{
   font-weight: bold;
+}
+
+.BodyDiv{
+  display: flex;
+  flex-direction: column;
+  background-image: url("https://www.cascadefarmersmutual.com/wp-content/uploads/2015/03/1-1140x460.jpg");
+  background-repeat: no-repeat; 
+  overflow: scroll;
+  /* background-position: center; */
+  background-size: cover;
+  height: 85vh;
+  width: 100vw;
+ 
+}
+
+.Footer{
+  background-color: black;
+  height: 20vh;
+  color: white;
+  display: flex;
 }

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { addUser, selectUser } from "../features/userSlice";
+import Footer from "./Footer";
 import "../App.css";
 
 let URL = "";
@@ -40,39 +41,47 @@ export default function UserLogin() {
   };
 
   return (
-    <div className="App-header">
-      <main className="userLogin">
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        ></input>
-        <input
-          placeholder="First Name"
-          value={firstName}
-          onChange={(e) => {
-            setFirstName(e.target.value);
-          }}
-        ></input>
-        <input
-          placeholder="Last Name"
-          value={lastName}
-          onChange={(e) => {
-            setLastName(e.target.value);
-          }}
-        ></input>
-        <button
-          onClick={async () => {
-            let fetchedUser = await sendLoginRequest();
-            localStorage.setItem("user", JSON.stringify(fetchedUser.payload));
-            dispatch(addUser(JSON.parse(localStorage.getItem("user"))));
-          }}
-        >
-          SIGN IN
-        </button>{" "}
-      </main>
+    <div className="BodyDiv">
+      <div className="DivImg">
+        <div className="App-header">
+          <main className="userLogin">
+            <input
+              placeholder="Email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            ></input>
+            <input
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
+            ></input>
+            <input
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
+            ></input>
+            <button
+              onClick={async () => {
+                let fetchedUser = await sendLoginRequest();
+                localStorage.setItem(
+                  "user",
+                  JSON.stringify(fetchedUser.payload)
+                );
+                dispatch(addUser(JSON.parse(localStorage.getItem("user"))));
+              }}
+            >
+              SIGN IN
+            </button>{" "}
+          </main>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import "../App.css";
 import ClaimHistory from "./ClaimHistory";
+import Footer from "./Footer";
 
 let URL = "";
 
@@ -47,51 +48,58 @@ export default function CreateClaim() {
   }, []);
 
   return (
-    <div>
-      <div className="App-header">
+    <div className="BodyDiv">
+      <div className="DivImg">
         {user !== null ? (
-          <main>
-            <div className="CreateClaimForm">
-              <input
-                placeholder="Title"
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-              ></input>
-              <input
-                placeholder="Description"
-                value={description}
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
-              ></input>
-              <button
-                onClick={() => {
-                  if (title.length > 0 && description.length > 0) {
-                    if (user !== null) {
-                      sendCreateClaimRequest();
-                      setTitle("");
-                      setDescription("");
-                    }
-                  }
-                }}
-              >
-                Submit Claim
-              </button>
-            </div>
-            <div>
-              <ClaimHistory claimHistoryArray={claimHistoryArray} />
-            </div>
-          </main>
-        ) : (
           <div className="App-header">
-            <Link className="agentLogIn" to="/user-login">
-              LOG IN
-            </Link>
+            <main className="Container">
+              <div className="CreateClaimForm">
+                <input
+                  placeholder="Title"
+                  value={title}
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                ></input>
+                <input
+                  placeholder="Description"
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                ></input>
+                <button
+                  onClick={() => {
+                    if (title.length > 0 && description.length > 0) {
+                      if (user !== null) {
+                        sendCreateClaimRequest();
+                        setTitle("");
+                        setDescription("");
+                      }
+                    }
+                  }}
+                >
+                  Submit Claim
+                </button>
+              </div>
+              <div>
+                <ClaimHistory claimHistoryArray={claimHistoryArray} />
+              </div>
+            </main>
+          </div>
+        ) : (
+          <div className="BodyDiv">
+            <div className="DivImg">
+              <div className="App-header">
+                <Link className="agentLogIn" to="/user-login">
+                  LOG IN
+                </Link>
+              </div>
+            </div>
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }
