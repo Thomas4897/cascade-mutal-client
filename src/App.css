@@ -158,14 +158,23 @@ img{
 .BodyDiv{
   display: flex;
   flex-direction: column;
+  /* background-image: url("https://www.cascadefarmersmutual.com/wp-content/uploads/2015/03/1-1140x460.jpg");
+  background-repeat: no-repeat; 
+  overflow: scroll;
+  background-position: center;
+  background-size: cover;
+  height: 85vh;
+  width: 100vw; */
+ 
+}
+
+.DivImg{
   background-image: url("https://www.cascadefarmersmutual.com/wp-content/uploads/2015/03/1-1140x460.jpg");
   background-repeat: no-repeat; 
   overflow: scroll;
-  /* background-position: center; */
   background-size: cover;
   height: 85vh;
-  width: 100vw;
- 
+  /* width: 100vw; */
 }
 
 .Footer{
