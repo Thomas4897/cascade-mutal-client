@@ -11,8 +11,6 @@ process.env.REACT_APP_PRODUCTION === "heroku"
   : (URL = "http://localhost:4000");
 
 export default function ClaimHistory({ claimHistoryArray }) {
-  // const user = useSelector(selectUser);
-
   return (
     <main className="CreateClaimForm">
       <div className="ClaimHistory">

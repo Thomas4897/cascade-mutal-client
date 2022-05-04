@@ -27,21 +27,9 @@ export default function NavBar() {
           <Link className="link" to="/">
             HOME
           </Link>
-          {/* <Link className="link" to="about">
-            ABOUT US
-          </Link>
-          <Link className="link" to="policies">
-            POLICIES
-          </Link>
-          <Link className="link" to="packages">
-            PACAKAGES
-          </Link> */}
           <Link className="link" to="claims">
             CLAIMS
           </Link>
-          {/* <Link className="link" to="makePayment">
-            MAKE PAYMENT
-          </Link> */}
         </nav>
         <div className="NavBar-LoginContact">
           {user === null ? (

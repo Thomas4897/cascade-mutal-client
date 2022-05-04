@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
-import { selectUser, selectUserFirstName } from "../features/userSlice";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 
 export default function App() {
   const user = useSelector(selectUser);
-  console.log(user);
 
   return (
     <div>

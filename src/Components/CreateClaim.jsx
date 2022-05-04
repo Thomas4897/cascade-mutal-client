@@ -2,14 +2,9 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
 import { selectUser } from "../features/userSlice";
 import "../App.css";
 import ClaimHistory from "./ClaimHistory";
-
-// const URL = "http://localhost:4000";
-
-// const URL = process.env.REACT_APP_URL || "http://localhost:4000";
 
 let URL = "";
 
@@ -53,7 +48,6 @@ export default function CreateClaim() {
 
   return (
     <div>
-      {/* {userId.length > 0 ? ( */}
       <div className="App-header">
         {user !== null ? (
           <main>
@@ -74,10 +68,12 @@ export default function CreateClaim() {
               ></input>
               <button
                 onClick={() => {
-                  if (user !== null) {
-                    sendCreateClaimRequest();
-                    setTitle("");
-                    setDescription("");
+                  if (title.length > 0 && description.length > 0) {
+                    if (user !== null) {
+                      sendCreateClaimRequest();
+                      setTitle("");
+                      setDescription("");
+                    }
                   }
                 }}
               >

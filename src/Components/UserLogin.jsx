@@ -2,29 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addUser,
-  deleteUser,
-  resetState,
-  selectUser,
-} from "../features/userSlice";
+import { addUser, selectUser } from "../features/userSlice";
 import "../App.css";
-
-// const URL = "http://localhost:4000";
-
-// const URL = process.env.REACT_APP_URL || "http://localhost:4000";
 
 let URL = "";
 
 process.env.REACT_APP_PRODUCTION === "heroku"
   ? (URL = process.env.REACT_APP_URL)
   : (URL = "http://localhost:4000");
-
-// const sendGetRequest = async () => {
-//   axios.get(`/users/`).then((response) => {
-//     console.log(response.data);
-//   });
-// };
 
 export default function UserLogin() {
   const user = useSelector(selectUser);
