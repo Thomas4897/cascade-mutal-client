@@ -97,4 +97,64 @@ img{
   border-radius: 5px;
 }
 
+.CreateClaimForm{
+  text-align: center;
+  margin: 40px;
+}
 
+.ClaimHistory{
+  text-align: left;
+  /* border: 2px solid white; */
+  /* padding: 20px; */
+  margin: 20px;
+
+}
+
+.ClaimHistoryHeader{
+  text-align: center;
+  color: black;
+  background-color: orange;
+  padding: 15px;
+  border-radius: 5px;
+  font-weight: normal;
+}
+
+.ClaimHistoryDisplay{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  font-size: 20px;
+}
+
+.Claims{
+  border: 2px solid white;
+  padding: 30px;
+  width: 400px;
+  margin: 20px;
+  font-weight: bold;
+
+}
+
+.ClaimTitle{
+  text-align: center;
+  padding-bottom: 3px;
+  font-weight: bolder;
+}
+
+.ClaimDate{
+  font-size: 14px;
+  padding-bottom: 2px;
+  font-weight: normal;
+  text-align: center ;
+}
+
+.ClaimID{
+  font-size: 14px;
+  padding-bottom: 20px;
+  font-weight: normal;
+  text-align: center;
+}
+
+.ClaimDescription{
+  font-weight: bold;
+}

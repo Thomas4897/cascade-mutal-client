@@ -1,69 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 import "../App.css";
 
-const URL = "http://localhost:4000";
+let URL = "";
 
-export default function ClaimHistory() {
-  const [email, setEmail] = useState("");
-  const [userId, setUserId] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+process.env.REACT_APP_PRODUCTION === "heroku"
+  ? (URL = process.env.REACT_APP_URL)
+  : (URL = "http://localhost:4000");
 
-  const sendCreateClaimRequest = async () => {
-    axios
-      .post(`${URL}/claims/create-claim`, {
-        userId: "c7e36289-2ae0-487e-a1b3-f585c89ef47c",
-        title: title,
-        description: description,
-      })
-      .then((response) => {
-        console.log(response.data);
-      });
-  };
-
-  const sendGetUserIdRequest = async () => {
-    axios
-      .get(`http://localhost:4000/users/get-userId/${email}`)
-      .then((response) => {
-        console.log(response.data);
-        setUserId(response.data.payload);
-      });
-  };
+export default function ClaimHistory({ claimHistoryArray }) {
+  // const user = useSelector(selectUser);
 
   return (
     <main className="CreateClaimForm">
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value);
-          console.log(email);
-        }}
-      ></input>
-
-      <input
-        placeholder="Title"
-        value={title}
-        onChange={(e) => {
-          setTitle(e.target.value);
-        }}
-      ></input>
-      <input
-        placeholder="Description"
-        value={description}
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-      ></input>
-      <button
-        onClick={() => {
-          sendGetUserIdRequest();
-          sendCreateClaimRequest();
-        }}
-      >
-        Submit Claim
-      </button>
+      <div className="ClaimHistory">
+        <h3 className="ClaimHistoryHeader">Claim History</h3>
+        <div className="ClaimHistoryDisplay">
+          {claimHistoryArray.map((e) => {
+            return (
+              <div key={e.claimId} className="Claims">
+                <div className="ClaimTitle">Title: {e.title}</div>
+                <div className="ClaimDate">Claim Date: {e.creationDate}</div>
+                <div className="ClaimID">Claim ID: {e.claimId}</div>
+                <div className="ClaimDescription">
+                  Description: {e.description}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </main>
   );
 }

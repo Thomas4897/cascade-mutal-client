@@ -3,16 +3,10 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  addUserId,
-  deleteUserId,
+  addUser,
+  deleteUser,
   resetState,
-  selectUserId,
-  setEmail,
-  setFirstName,
-  setLastName,
-  selectUserEmail,
-  selectUserFirstName,
-  selectUserLastName,
+  selectUser,
 } from "../features/userSlice";
 import "../App.css";
 
@@ -33,18 +27,18 @@ process.env.REACT_APP_PRODUCTION === "heroku"
 // };
 
 export default function UserLogin() {
-  const userId = useSelector(selectUserId);
-  const email = useSelector(selectUserEmail);
-  const firstName = useSelector(selectUserFirstName);
-  const lastName = useSelector(selectUserLastName);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   useEffect(() => {
-    if (userId.length > 0) {
+    if (user !== null) {
       navigate("/");
     }
-  }, [userId]);
+  }, [user]);
 
   const sendLoginRequest = async () => {
     const response = axios
@@ -67,28 +61,28 @@ export default function UserLogin() {
           placeholder="Email"
           value={email}
           onChange={(e) => {
-            dispatch(setEmail(e.target.value));
+            setEmail(e.target.value);
           }}
         ></input>
         <input
           placeholder="First Name"
           value={firstName}
           onChange={(e) => {
-            dispatch(setFirstName(e.target.value));
+            setFirstName(e.target.value);
           }}
         ></input>
         <input
           placeholder="Last Name"
           value={lastName}
           onChange={(e) => {
-            dispatch(setLastName(e.target.value));
+            setLastName(e.target.value);
           }}
         ></input>
         <button
           onClick={async () => {
-            let fetchedUserId = await sendLoginRequest();
-            localStorage.setItem("user", fetchedUserId.payload);
-            dispatch(addUserId(localStorage.getItem("user")));
+            let fetchedUser = await sendLoginRequest();
+            localStorage.setItem("user", JSON.stringify(fetchedUser.payload));
+            dispatch(addUser(JSON.parse(localStorage.getItem("user"))));
           }}
         >
           SIGN IN

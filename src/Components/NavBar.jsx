@@ -1,20 +1,27 @@
 import { Outlet, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteUserId, selectUserId, resetState } from "../features/userSlice";
+import { selectUser, resetState, addUser } from "../features/userSlice";
 import { useNavigate } from "react-router";
+import logo from "../logo.png";
+
+import { useEffect } from "react";
 
 import "../App.css";
 
 export default function NavBar() {
   let navigate = useNavigate();
-  const userId = useSelector(selectUserId);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(addUser(JSON.parse(localStorage.getItem("user"))));
+  }, []);
 
   return (
     <div>
       <div className="App-NavBar">
         <div className="cascadeLogo">
-          <img src="cascade-mutal-client/src/cascade-mutual-logo.jpeg" />
+          <img src={logo}></img>
         </div>
         <nav className="NavBar-Links">
           <Link className="link" to="/">
@@ -37,7 +44,7 @@ export default function NavBar() {
           </Link> */}
         </nav>
         <div className="NavBar-LoginContact">
-          {userId.length <= 0 ? (
+          {user === null ? (
             <Link className="agentLogIn" to="user-login">
               LOG IN
             </Link>

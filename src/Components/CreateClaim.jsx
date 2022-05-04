@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import { selectUserId } from "../features/userSlice";
+
+import { selectUser } from "../features/userSlice";
 import "../App.css";
+import ClaimHistory from "./ClaimHistory";
 
 // const URL = "http://localhost:4000";
 
@@ -18,70 +20,91 @@ process.env.REACT_APP_PRODUCTION === "heroku"
 export default function CreateClaim() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const userId = useSelector(selectUserId);
-  let navigate = useNavigate();
+  const user = useSelector(selectUser);
+  const [claimHistoryArray, setClaimHistoryArray] = useState([]);
 
   const sendCreateClaimRequest = async () => {
     axios
       .post(`${URL}/claims/create-claim`, {
-        userId: userId,
+        userId: user.userId,
         title: title,
         description: description,
       })
       .then((response) => {
-        console.log(response.data);
+        setClaimHistoryArray(response.data.payload);
       });
   };
 
-  // const sendGetUserIdRequest = async () => {
-  //   axios
-  //     .get(`http://localhost:4000/users/get-userId/${email}`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setUserId(response.data.payload);
-  //     });
-  // };
+  useEffect(() => {
+    const sendCreateClaimRequest = async () => {
+      axios
+        .get(
+          `${URL}/users/claim-history/${
+            JSON.parse(localStorage.getItem("user")).userId
+          }`
+        )
+        .then((response) => {
+          setClaimHistoryArray(response.data.payload);
+        });
+    };
+
+    sendCreateClaimRequest();
+  }, []);
 
   return (
-    <div className="App-header">
-      {userId.length > 0 ? (
-        <main className="CreateClaimForm">
-          <input
-            placeholder="Title"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          ></input>
-          <input
-            placeholder="Description"
-            value={description}
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          ></input>
-          <button
-            onClick={() => {
-              if (userId.length > 0) {
-                sendCreateClaimRequest();
-                setTitle("");
-                setDescription("");
-              }
-            }}
-          >
-            Submit Claim
-          </button>
-        </main>
-      ) : (
-        <div
-          className="agentLogIn"
-          onClick={() => {
-            navigate("/user-login");
-          }}
-        >
-          LOG IN
-        </div>
-      )}
+    <div>
+      {/* {userId.length > 0 ? ( */}
+      <div className="App-header">
+        {user !== null ? (
+          <main>
+            <div className="CreateClaimForm">
+              <input
+                placeholder="Title"
+                value={title}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              ></input>
+              <input
+                placeholder="Description"
+                value={description}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              ></input>
+              <button
+                onClick={() => {
+                  if (user !== null) {
+                    sendCreateClaimRequest();
+                    setTitle("");
+                    setDescription("");
+                  }
+                }}
+              >
+                Submit Claim
+              </button>
+            </div>
+            <div>
+              <ClaimHistory claimHistoryArray={claimHistoryArray} />
+            </div>
+          </main>
+        ) : (
+          <div className="App-header">
+            <Link className="agentLogIn" to="/user-login">
+              LOG IN
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+
+// const sendGetUserIdRequest = async () => {
+//   axios
+//     .get(`http://localhost:4000/users/get-userId/${email}`)
+//     .then((response) => {
+//       console.log(response.data);
+//       setUserId(response.data.payload);
+//     });
+// };
